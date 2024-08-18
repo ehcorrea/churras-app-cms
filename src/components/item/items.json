@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_item_items",
+  "info": {
+    "displayName": "Items",
+    "icon": "file",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "categoria": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::categoria.categoria"
+    },
+    "nome": {
+      "type": "string",
+      "required": true
+    },
+    "quantidade": {
+      "type": "float",
+      "required": true
+    },
+    "responsaveis": {
+      "displayName": "responsaveis",
+      "type": "component",
+      "repeatable": true,
+      "component": "item.responsaveis",
+      "required": false
+    }
+  }
+}

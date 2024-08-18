@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "medidas",
+  "info": {
+    "singularName": "medida",
+    "pluralName": "medidas",
+    "displayName": "Medida",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "tipo": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    }
+  }
+}

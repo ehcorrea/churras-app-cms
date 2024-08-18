@@ -362,6 +362,131 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
+export interface ApiCategoriaCategoria extends Schema.CollectionType {
+  collectionName: 'categorias';
+  info: {
+    singularName: 'categoria';
+    pluralName: 'categorias';
+    displayName: 'Categoria';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nome: Attribute.Enumeration<
+      [
+        'Essenciais',
+        'Carnes',
+        'Bebidas',
+        'Aperitivos',
+        'Acompanhamentos',
+        'Molhos',
+        'Tempero',
+        'Sobremesas'
+      ]
+    > &
+      Attribute.Required;
+    exemplo: Attribute.Text & Attribute.Required;
+    medidas: Attribute.Relation<
+      'api::categoria.categoria',
+      'oneToMany',
+      'api::medida.medida'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::categoria.categoria',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::categoria.categoria',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiEventoEvento extends Schema.CollectionType {
+  collectionName: 'eventos';
+  info: {
+    singularName: 'evento';
+    pluralName: 'eventos';
+    displayName: 'Evento';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nome: Attribute.String & Attribute.Required;
+    data: Attribute.DateTime & Attribute.Required;
+    capa: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    owner: Attribute.Relation<
+      'api::evento.evento',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    convidados: Attribute.Relation<
+      'api::evento.evento',
+      'oneToMany',
+      'plugin::users-permissions.user'
+    >;
+    local: Attribute.JSON & Attribute.Required;
+    items: Attribute.Component<'item.items', true> & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::evento.evento',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::evento.evento',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiMedidaMedida extends Schema.CollectionType {
+  collectionName: 'medidas';
+  info: {
+    singularName: 'medida';
+    pluralName: 'medidas';
+    displayName: 'Medida';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    tipo: Attribute.String & Attribute.Required & Attribute.Unique;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::medida.medida',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::medida.medida',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -742,7 +867,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     username: Attribute.String &
@@ -771,6 +895,7 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
+    nome: Attribute.String & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -798,6 +923,9 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
+      'api::categoria.categoria': ApiCategoriaCategoria;
+      'api::evento.evento': ApiEventoEvento;
+      'api::medida.medida': ApiMedidaMedida;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;

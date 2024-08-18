@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_item_responsaveis",
+  "info": {
+    "displayName": "responsaveis",
+    "icon": "walk",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "convidado": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "quantidade": {
+      "type": "float",
+      "required": true
+    }
+  }
+}
