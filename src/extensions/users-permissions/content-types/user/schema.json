@@ -65,9 +65,11 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "nome": {
-      "type": "string",
-      "required": true
+    "phoneNumber": {
+      "type": "string"
+    },
+    "firebaseUserID": {
+      "type": "string"
     }
   }
 }
